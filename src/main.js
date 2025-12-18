@@ -1,75 +1,137 @@
+/**
+ * VIRT-IQ.ORG Core Script
+ * Includes: Navigation, Animations, Form Logic, Captcha, Cookies
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
-    lucide.createIcons();
-    AOS.init({ duration: 1000, once: true });
+    // 1. Инициализация иконок Lucide
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 
-    // --- GSAP Hero Animation ---
-    gsap.from("#hero-title", {
-        duration: 1.2,
-        y: 50,
-        opacity: 0,
-        ease: "power4.out",
-        delay: 0.2
-    });
-
-    // --- Mobile Menu ---
-    const burger = document.getElementById('burger-menu');
-    const overlay = document.getElementById('mobile-overlay');
-    
-    burger.addEventListener('click', () => {
-        burger.classList.toggle('burger--active');
-        overlay.style.display = overlay.style.display === 'flex' ? 'none' : 'flex';
-        document.body.style.overflow = overlay.style.display === 'flex' ? 'hidden' : 'initial';
-    });
-
-    // Close menu on link click
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            burger.classList.remove('burger--active');
-            document.body.style.overflow = 'initial';
-        });
-    });
-
-    // --- Math Captcha ---
-    const num1 = Math.floor(Math.random() * 10);
-    const num2 = Math.floor(Math.random() * 10);
-    const captchaLabel = document.getElementById('captcha-label');
-    const correctSum = num1 + num2;
-    if(captchaLabel) captchaLabel.innerText = `Сколько будет ${num1} + ${num2}?`;
-
-    // --- Form Handling ---
-    const form = document.getElementById('main-form');
-    const status = document.getElementById('form-status');
-
-    if(form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const captchaInput = document.getElementById('captcha-input').value;
-
-            if (parseInt(captchaInput) !== correctSum) {
-                status.innerText = "Ошибка капчи. Попробуйте снова.";
-                status.className = "form__status error";
-                return;
-            }
-
-            status.innerText = "Отправка...";
-            status.className = "form__status";
-
-            // Имитация AJAX
-            setTimeout(() => {
-                status.innerText = "Спасибо! Мы свяжемся с вами в ближайшее время.";
-                status.className = "form__status success";
-                form.reset();
-            }, 1500);
+    // 2. Инициализация AOS (анимация при скролле)
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-expo',
+            once: true,
+            offset: 100
         });
     }
 
-    // --- Cookie Consent ---
-    if (!localStorage.getItem('cookieAccepted')) {
-        const cookiePopup = document.getElementById('cookie-popup');
-        cookiePopup.style.display = 'block';
-        document.getElementById('cookie-accept').addEventListener('click', () => {
-            localStorage.setItem('cookieAccepted', 'true');
+    // 3. Управление хедером при скролле
+    const header = document.getElementById('header');
+    const handleScroll = () => {
+        if (window.scrollY > 50) {
+            header.classList.add('header--scrolled');
+        } else {
+            header.classList.remove('header--scrolled');
+        }
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    // 4. Мобильное меню (Бургер)
+    const burger = document.getElementById('burger-menu');
+    const overlay = document.getElementById('mobile-overlay');
+    const navLinks = document.querySelectorAll('.mobile-nav a');
+
+    const toggleMenu = () => {
+        const isActive = burger.classList.toggle('burger--active');
+        overlay.style.display = isActive ? 'flex' : 'none';
+        document.body.style.overflow = isActive ? 'hidden' : 'initial';
+        
+        if (isActive) {
+            gsap.from(".mobile-nav li", {
+                opacity: 0,
+                y: 20,
+                stagger: 0.1,
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        }
+    };
+
+    if (burger) {
+        burger.addEventListener('click', toggleMenu);
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (burger.classList.contains('burger--active')) toggleMenu();
+        });
+    });
+
+    // 5. GSAP Hero Text Animation
+    if (typeof gsap !== 'undefined') {
+        gsap.to("#hero-title", {
+            opacity: 1,
+            y: 0,
+            duration: 1.5,
+            ease: "expo.out",
+            delay: 0.3
+        });
+    }
+
+    // 6. Математическая капча
+    const captchaLabel = document.getElementById('captcha-label');
+    const captchaInput = document.getElementById('captcha-input');
+    let captchaResult = 0;
+
+    const generateCaptcha = () => {
+        const n1 = Math.floor(Math.random() * 10) + 1;
+        const n2 = Math.floor(Math.random() * 10) + 1;
+        captchaResult = n1 + n2;
+        if (captchaLabel) captchaLabel.innerText = `Подтвердите, что вы не робот: ${n1} + ${n2} = ?`;
+    };
+    generateCaptcha();
+
+    // 7. Валидация и отправка формы (AJAX имитация)
+    const contactForm = document.getElementById('main-form');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Проверка капчи
+            if (parseInt(captchaInput.value) !== captchaResult) {
+                formStatus.innerText = "Ошибка капчи. Попробуйте еще раз.";
+                formStatus.className = "form__status error";
+                generateCaptcha();
+                captchaInput.value = '';
+                return;
+            }
+
+            // Имитация отправки
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Отправка...";
+            
+            setTimeout(() => {
+                formStatus.innerText = "Успешно! Ваша заявка принята. Мы свяжемся с вами.";
+                formStatus.className = "form__status success";
+                contactForm.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Отправить запрос";
+                generateCaptcha();
+            }, 2000);
+        });
+    }
+
+    // 8. Cookie Popup
+    const cookiePopup = document.getElementById('cookie-popup');
+    const cookieAccept = document.getElementById('cookie-accept');
+
+    if (cookiePopup && !localStorage.getItem('virtiq_cookies')) {
+        setTimeout(() => {
+            cookiePopup.style.display = 'block';
+            gsap.from(cookiePopup, { y: 100, opacity: 0, duration: 0.6 });
+        }, 3000);
+    }
+
+    if (cookieAccept) {
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('virtiq_cookies', 'true');
             cookiePopup.style.display = 'none';
         });
     }
