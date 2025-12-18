@@ -702,3 +702,92 @@ section {
         order: 2;
     }
 }
+/* --- LEGAL PAGES STYLES --- */
+.pages {
+    padding: 120px 0 80px;
+    /* Отступ сверху под фиксированный хедер */
+    background: var(--bg-dark);
+    min-height: 100vh;
+}
+
+.pages .container {
+    max-width: 800px;
+    /* Суженная колонка для лучшей читаемости текста */
+}
+
+.pages h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--white);
+    margin-bottom: 2rem;
+    line-height: 1.1;
+}
+
+.pages h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin: 3rem 0 1.5rem;
+}
+
+.pages p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+.pages ul {
+    margin-bottom: 2rem;
+}
+
+.pages li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+/* Кастомный маркер списка в стиле Virt-IQ */
+.pages li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 2px;
+    rotate: 45deg;
+}
+
+.pages strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.pages a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.pages a:hover {
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .pages {
+        padding-top: 100px;
+    }
+
+    .pages h1 {
+        font-size: 2.2rem;
+    }
+
+    .pages h2 {
+        font-size: 1.5rem;
+    }
+}
