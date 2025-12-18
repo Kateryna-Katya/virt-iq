@@ -1,0 +1,127 @@
+<section class="hero" id="hero">
+    <div class="container hero__container">
+        <div class="hero__content">
+            <span class="hero__badge" data-aos="fade-down">Платформа года в Европе</span>
+            <h1 class="hero__title" id="hero-title">
+                Постройте карьеру, которая работает на вас
+            </h1>
+            <p class="hero__subtitle" data-aos="fade-up" data-aos-delay="200">
+                Инновационная технология анализа рынка и AI-инструменты для реальных задач вашего профессионального
+                роста.
+            </p>
+            <div class="hero__btns" data-aos="fade-up" data-aos-delay="400">
+                <a href="#contact" class="btn btn--primary">Начать сейчас</a>
+                <a href="#about" class="btn btn--outline">Узнать детали</a>
+            </div>
+        </div>
+    </div>
+    <div class="hero__bg-glow"></div>
+</section>
+
+<section class="about" id="about">
+    <div class="container about__grid">
+        <div class="about__image" data-aos="zoom-in">
+            <img src="/img/one.jpg" alt="Innovation">
+        </div>
+        <div class="about__content" data-aos="fade-left">
+            <h2 class="section-title">Технология нового поколения для карьеры</h2>
+            <p>Virt-IQ — это передовая цифровая инфраструктура, созданная для тех, кто готов переосмыслить подход к
+                развитию. Мы объединяем опыт ведущих экспертов ЕС и нейронные сети.</p>
+            <ul class="about__list">
+                <li><i data-lucide="check-circle"></i> Быстрый и лёгкий старт</li>
+                <li><i data-lucide="check-circle"></i> Решения, которые меняют правила игры</li>
+                <li><i data-lucide="check-circle"></i> Экспертная поддержка на всех этапах</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="benefits" id="benefits">
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">Преимущества платформы</h2>
+        <div class="benefits__grid">
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                <i data-lucide="zap" class="benefit-card__icon"></i>
+                <h3>Удобная адаптация</h3>
+                <p>Пошаговый путь, понятный каждому. Подключение занимает всего 2 минуты.</p>
+            </div>
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                <i data-lucide="trending-up" class="benefit-card__icon"></i>
+                <h3>Стратегия роста</h3>
+                <p>Практики, применимые уже сегодня на базе инноваций мирового уровня.</p>
+            </div>
+            <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                <i data-lucide="shield-check" class="benefit-card__icon"></i>
+                <h3>Проверенный партнер</h3>
+                <p>Методологии, доказавшие эффективность в странах ЕС и Италии.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="innovation" id="innovation">
+    <div class="container innovation__box" data-aos="flip-up">
+        <div class="innovation__info">
+            <h2>AI-инструменты для реальных задач</h2>
+            <p>Доступ к платформе открыт. Оцените перспективы проекта прямо сейчас.</p>
+            <a href="#contact" class="btn btn--primary">Запросить доступ</a>
+        </div>
+    </div>
+</section>
+
+<section class="blog" id="blog">
+    <div class="container">
+        <h2 class="section-title">Образовательный блог</h2>
+        <div class="blog__grid">
+            <article class="blog-card" data-aos="fade-right">
+                <div class="blog-card__img"><img src="/img/two.jpg" alt="computer"></div>
+                <div class="blog-card__body">
+                    <span>Технологии</span>
+                    <h4>Как AI меняет рынок труда в 2025 году</h4>
+                    <p>Разбираем решения, которые меняют правила игры в найме...</p>
+                </div>
+            </article>
+            <article class="blog-card" data-aos="fade-left">
+                <div class="blog-card__img"><img src="/img/three.jpg" alt="computer"></div>
+                <div class="blog-card__body">
+                    <span>Карьера</span>
+                    <h4>Программа пассивного дохода для профи</h4>
+                    <p>Расширьте горизонты проекта с помощью новых методик...</p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="container contact__container">
+        <div class="contact__form-wrapper" data-aos="fade-up">
+            <h2 class="section-title text-center">Бесплатная консультация</h2>
+            <form id="main-form" class="form">
+                <div class="form__group">
+                    <input type="text" name="name" placeholder="Ваше имя" required class="form__input">
+                </div>
+                <div class="form__group">
+                    <input type="email" name="email" placeholder="Email" required class="form__input">
+                </div>
+                <div class="form__group">
+                    <input type="tel" name="phone" placeholder="Телефон (только цифры)" required pattern="[0-9+]+"
+                        class="form__input">
+                </div>
+
+                <div class="form__captcha">
+                    <label id="captcha-label">Сколько будет 5 + 3?</label>
+                    <input type="text" id="captcha-input" placeholder="Ответ" required class="form__input">
+                </div>
+
+                <label class="form__checkbox">
+                    <input type="checkbox" required>
+                    <span>Я согласен с <a href="./privacy.html">политикой обработки данных</a></span>
+                </label>
+
+                <button type="submit" class="btn btn--primary btn--full">Отправить запрос</button>
+                <div id="form-status" class="form__status"></div>
+            </form>
+        </div>
+    </div>
+</section>
